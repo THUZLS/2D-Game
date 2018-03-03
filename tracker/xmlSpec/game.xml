@@ -1,0 +1,119 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation. 
+     So make sure to include your name as part of the screenTitle -->
+<title>Lance's Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>300</maxFrames>
+<username>lance</username>
+
+<numFlame>12</numFlame>
+<numDragon>1</numDragon>
+
+
+<view>
+  <width>854</width>
+  <height>550</height>
+</view>
+
+<world>
+  <width>1920</width>
+  <height>1080</height>
+</world>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>0</red>
+  <green>0</green>
+  <blue>255</blue>
+  <alpha>0</alpha>
+</font>
+
+<display>
+  <tracking>
+    <locX>20</locX>
+    <locY>20</locY>
+    <fontcolor>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+      <alpha>255</alpha>
+    </fontcolor>
+  </tracking>
+  <fps>
+    <locX>20</locX>
+    <locY>50</locY>
+    <fontcolor>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+      <alpha>255</alpha>
+    </fontcolor>
+  </fps>
+  <name>
+    <locX>20</locX>
+    <locY>500</locY>
+    <fontcolor>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+      <alpha>255</alpha>
+    </fontcolor>
+  </name>
+</display>
+
+<sky>
+  <file>assets/sky.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</sky>
+
+<hills>
+  <file>assets/hills.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</hills>
+
+<mountain>
+  <file>assets/mountain.png</file>
+  <factor>3</factor>
+  <transparency>false</transparency>
+</mountain>
+
+<rock>
+  <file>assets/rock.png</file>
+  <factor>2</factor>
+  <transparency>false</transparency>
+</rock>
+
+<desert>
+  <file>assets/desert.png</file>
+  <factor>1</factor>
+  <transparency>false</transparency>
+</desert>
+
+<dragon>
+  <file>assets/dragon.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>2</frames>
+  <imageWidth>260</imageWidth>
+  <imageHeight>260</imageHeight>>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</dragon>
+
+<flame>
+  <file>assets/flame.png</file>
+  <startLoc x="227" y="240"/>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</flame>
+
+</GameData>
