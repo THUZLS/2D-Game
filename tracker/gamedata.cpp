@@ -79,7 +79,7 @@ void Gamedata::displayData() const {
     ++ptr;
   }*/
 
-  for(auto x : gameData){
+  for(auto& x : gameData){
     std::cout << '(' << x.first << ", " 
                      << x.second << ')' << std::endl;
   }

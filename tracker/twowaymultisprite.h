@@ -5,10 +5,10 @@
 #include <cmath>
 #include "drawable.h"
 
-class Twowaymultisprite : public Drawable {
+class TwoWayMultiSprite : public Drawable {
 public:
-  Twowaymultisprite(const std::string&);
-  Twowaymultisprite(const Twowaymultisprite&);
+  TwoWayMultiSprite(const std::string&);
+  TwoWayMultiSprite(const TwoWayMultiSprite&);
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -27,15 +27,18 @@ public:
   }
 
 protected:
+  std::vector<Image *> imagesRight;
+  std::vector<Image *> imagesLeft;
   std::vector<Image *> images;
 
   unsigned currentFrame;
+  unsigned numberOfFrames;
+  unsigned frameInterval;
+  float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
 
-  void switchFrame();
-  Twowaymultisprite& operator=(const Twowaymultisprite&);
-
-  Vector2f makeVelocity(int, int) const;
+  void advanceFrame(Uint32 ticks);
+  TwoWayMultiSprite& operator=(const TwoWayMultiSprite&);
 };
 #endif

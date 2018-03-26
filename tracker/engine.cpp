@@ -12,7 +12,9 @@
 #include "frameGenerator.h"
 
 Engine::~Engine() { 
-  sprites.clear();
+  for(auto sprite : sprites) {
+    delete sprite;
+  }
   std::cout << "Terminating program" << std::endl;
 }
 
@@ -29,10 +31,10 @@ Engine::Engine() :
   viewport( Viewport::getInstance() ),
   sprites(),
   currentSprite(0),
-  makeVideo( true )
+  makeVideo( false )
 {
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numDragon"); i++) {
-    sprites.push_back(new Twowaymultisprite("dragon"));
+    sprites.push_back(new TwoWayMultiSprite("dragon"));
   }
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numFlame"); i++) {
     sprites.push_back(new Sprite("flame"));
