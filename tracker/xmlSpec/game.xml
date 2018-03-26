@@ -11,17 +11,17 @@
 <maxFrames>300</maxFrames>
 <username>lance</username>
 
-<numFlame>12</numFlame>
+<numFlame>30</numFlame>
 <numDragon>1</numDragon>
 
 
 <view>
-  <width>854</width>
-  <height>550</height>
+  <width>1920</width>
+  <height>1080</height>
 </view>
 
 <world>
-  <width>1920</width>
+  <width>5760</width>
   <height>1080</height>
 </world>
 
@@ -57,7 +57,7 @@
   </fps>
   <name>
     <locX>20</locX>
-    <locY>500</locY>
+    <locY>950</locY>
     <fontcolor>
       <red>0</red>
       <green>0</green>
@@ -69,13 +69,13 @@
 
 <sky>
   <file>assets/sky.png</file>
-  <factor>1</factor>
+  <factor>5</factor>
   <transparency>false</transparency>
 </sky>
 
 <hills>
   <file>assets/hills.png</file>
-  <factor>2</factor>
+  <factor>4</factor>
   <transparency>false</transparency>
 </hills>
 
@@ -100,19 +100,28 @@
 <dragon>
   <file>assets/dragon.png</file>
   <startLoc x="50" y="140"/>
-  <frames>2</frames>
-  <imageWidth>260</imageWidth>
-  <imageHeight>260</imageHeight>>
+  <frames>12</frames>
+  <frameInterval>300</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
 </dragon>
 
+<dragonLeft>
+  <file>assets/dragonLeft.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>12</frames>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</dragonLeft>
+
 <flame>
   <file>assets/flame.png</file>
   <startLoc x="227" y="240"/>
-  <speedX>300</speedX>
-  <speedY>300</speedY>
+  <speedX>260</speedX>
+  <speedY>260</speedY>
   <transparency>false</transparency>
 </flame>
 
