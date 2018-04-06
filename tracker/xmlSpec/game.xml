@@ -27,10 +27,12 @@
 
 <font name="font">
   <file>fonts/arial.ttf</file>
-  <size>24</size>
+  <Marker_Felt_Thin_file>fonts/Marker_Felt_Thin.ttf</Marker_Felt_Thin_file>
+  <size>23</size>
+  <Marker_Felt_Thin_size>39</Marker_Felt_Thin_size>
   <red>0</red>
   <green>0</green>
-  <blue>255</blue>
+  <blue>0</blue>
   <alpha>0</alpha>
 </font>
 
@@ -41,7 +43,7 @@
     <fontcolor>
       <red>0</red>
       <green>0</green>
-      <blue>255</blue>
+      <blue>0</blue>
       <alpha>255</alpha>
     </fontcolor>
   </tracking>
@@ -51,8 +53,8 @@
     <fontcolor>
       <red>0</red>
       <green>0</green>
-      <blue>255</blue>
-      <alpha>255</alpha>
+      <blue>0</blue>
+      <alpha>0</alpha>
     </fontcolor>
   </fps>
   <name>
@@ -61,10 +63,52 @@
     <fontcolor>
       <red>0</red>
       <green>0</green>
-      <blue>255</blue>
+      <blue>0</blue>
       <alpha>255</alpha>
     </fontcolor>
   </name>
+  <hud>
+    <locX>480</locX>
+    <locY>270</locY>
+    <width>960</width>
+    <height>540</height>
+    <title>
+      <text>"Function Key"</text>
+      <locX>820</locX>
+      <locY>320</locY>
+    </title>
+    <A_key>
+      <text>A Key: Move left</text>
+      <locX>820</locX>
+      <locY>420</locY>
+    </A_key>
+    <D_key>
+      <text>D Key: Move right</text>
+      <locX>820</locX>
+      <locY>490</locY>
+    </D_key>
+    <W_key>
+      <text>W Key: Move up</text>
+      <locX>820</locX>
+      <locY>560</locY>
+    </W_key>
+    <S_key>
+      <text>S Key: Move down</text>
+      <locX>820</locX>
+      <locY>630</locY>
+    </S_key>
+    <M_key>
+      <text>M Key: Change strategy</text>
+      <locX>820</locX>
+      <locY>700</locY>
+    </M_key>
+    <fontcolor>
+      <red>0</red>
+      <green>0</green>
+      <blue>255</blue>
+      <alpha>255</alpha>
+    </fontcolor>
+  </hud>
 </display>
 
 <sky>
@@ -119,10 +163,33 @@
 
 <flame>
   <file>assets/flame.png</file>
-  <startLoc x="227" y="240"/>
+  <startLoc x="727" y="740"/>
+  <safeDistance>300</safeDistance>
   <speedX>260</speedX>
   <speedY>260</speedY>
   <transparency>false</transparency>
 </flame>
+
+<LanceDragon>
+  <file>assets/dragon.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>12</frames>
+  <frameInterval>300</frameInterval>
+  <speedX>500</speedX>
+  <speedY>300</speedY>
+  <slowDownFactor>0.5</slowDownFactor>
+  <transparency>false</transparency>
+</LanceDragon>
+
+<LanceDragonLeft>
+  <file>assets/dragonLeft.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>12</frames>
+  <frameInterval>300</frameInterval>
+  <speedX>500</speedX>
+  <speedY>300</speedY>
+  <slowDownFactor>0.5</slowDownFactor>
+  <transparency>false</transparency>
+</LanceDragonLeft>
 
 </GameData>

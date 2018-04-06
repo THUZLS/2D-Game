@@ -5,6 +5,14 @@
 #include "clock.h"
 #include "world.h"
 #include "viewport.h"
+#include "twowaymultisprite.h"
+#include "smartSprite.h"
+#include "hud.h"
+
+class Player;
+class CollisionStrategy;
+class SmartSprite;
+//class SubjectSprite;
 
 class Engine {
 public:
@@ -26,13 +34,20 @@ private:
   World desert;
   Viewport& viewport;
 
-  std::vector<Drawable*> sprites;
+  std::vector<SmartSprite*> sprites;
+  std::vector<TwoWayMultiSprite*> dragons;
+  std::vector<CollisionStrategy*> strategies;
+  Player* player;
   int currentSprite;
+  int currentStrategy;
+  bool collision;
 
   bool makeVideo;
+  Hud& hud;
 
   void draw() const;
   void update(Uint32);
+  
 
   Engine(const Engine&) = delete;
   Engine& operator=(const Engine&) = delete;
