@@ -72,11 +72,17 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
-		images = imagesRight;
+//		images = imagesRight;
+  }
+  if (getVelocityX()>0){
+	images = imagesRight;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
-		images = imagesLeft;
+//		images = imagesLeft;
+  }
+  if (getVelocityX()<0){
+	images = imagesLeft;
   }
 
 }

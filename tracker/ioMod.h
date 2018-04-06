@@ -11,6 +11,7 @@ public:
   SDL_Surface* readSurface(const std::string& filename);
   void writeText(const std::string&, int, int, SDL_Color) const;
   void writeText(const std::string&, int, int) const;
+  void writeText(const std::string& msg, int x, int y, SDL_Color setColor, std::string str) const;
   SDL_Renderer* getRenderer() const { return renderer; }
 private:
   int init;

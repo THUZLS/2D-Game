@@ -70,4 +70,3 @@ Image* Image::crop(SDL_Rect sub)const{
 
   return cloned;
 }
-

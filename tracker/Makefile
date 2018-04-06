@@ -22,6 +22,10 @@ OBJS = \
 	clock.o \
 	engine.o \
         twowaymultisprite.o \
+	player.o \
+	collisionStrategy.o\
+	smartSprite.o\
+        hud.o\
 	main.o
 EXEC = run
 
