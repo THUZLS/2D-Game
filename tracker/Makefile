@@ -21,11 +21,17 @@ OBJS = \
 	vector2f.o \
 	clock.o \
 	engine.o \
-        twowaymultisprite.o \
+	twowaymultisprite.o \
 	player.o \
 	collisionStrategy.o\
 	smartSprite.o\
-        hud.o\
+	hud.o\
+	explodingSprite.o\
+	chunk.o\
+	smartTwowaymultisprite.o\
+	multibullets.o\
+	poolhud.o\
+	multibullet.o\
 	main.o
 EXEC = run
 

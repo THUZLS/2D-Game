@@ -1,6 +1,6 @@
 <?xml version = "1.0"?>
 <GameData>
-<!-- screenTitle is also used to identify you and your animation. 
+<!-- screenTitle is also used to identify you and your animation.
      So make sure to include your name as part of the screenTitle -->
 <title>Lance's Tracker Framework</title>
 <maxStringSize>50</maxStringSize>
@@ -12,8 +12,9 @@
 <username>lance</username>
 
 <numFlame>30</numFlame>
-<numDragon>1</numDragon>
+<numDragon>5</numDragon>
 
+<collisionStrategy>Rectangular</collisionStrategy>
 
 <view>
   <width>1920</width>
@@ -143,12 +144,17 @@
 
 <dragon>
   <file>assets/dragon.png</file>
-  <startLoc x="50" y="140"/>
+  <startLoc x="550" y="140"/>
   <frames>12</frames>
   <frameInterval>300</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <safeDistance>100</safeDistance>
+  <chunk>
+    <size>36</size>
+    <distance>200</distance>
+  </chunk>
 </dragon>
 
 <dragonLeft>
@@ -159,6 +165,10 @@
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>36</size>
+    <distance>200</distance>
+  </chunk>
 </dragonLeft>
 
 <flame>
@@ -168,6 +178,10 @@
   <speedX>260</speedX>
   <speedY>260</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>36</size>
+    <distance>200</distance>
+  </chunk>
 </flame>
 
 <LanceDragon>
@@ -179,6 +193,11 @@
   <speedY>300</speedY>
   <slowDownFactor>0.5</slowDownFactor>
   <transparency>false</transparency>
+  <chunk>
+    <size>36</size>
+    <distance>200</distance>
+  </chunk>
+  <bulletName>Bullet</bulletName>
 </LanceDragon>
 
 <LanceDragonLeft>
@@ -190,6 +209,36 @@
   <speedY>300</speedY>
   <slowDownFactor>0.5</slowDownFactor>
   <transparency>false</transparency>
+  <chunk>
+    <size>36</size>
+    <distance>200</distance>
+  </chunk>
+  <bulletName>Bullet</bulletName>
 </LanceDragonLeft>
+
+<Bullet>
+  <file>assets/bullet.png</file>
+  <interval>300</interval>
+  <distance>300</distance>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <minSpeedX>200</minSpeedX>
+  <frames>1</frames>
+  <frameInterval>200</frameInterval>
+  <startLoc x="100" y="100"/>
+  <strategy>rectangular</strategy>
+  <transparency>true</transparency>
+  <imageWidth>64</imageWidth>
+  <imageHeight>64</imageHeight>
+</Bullet>
+
+<PoolHud>
+  <positionX>1700</positionX>
+  <positionY>0</positionY>
+  <width>150</width>
+  <height>150</height>
+  <bulletList>Bullet List:  </bulletList>
+  <freeList>Free List:  </freeList>
+</PoolHud>
 
 </GameData>

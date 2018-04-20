@@ -11,8 +11,9 @@
 #include "engine.h"
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
+#include "smartTwowaymultisprite.h"
 
-Engine::~Engine() { 
+Engine::~Engine() {
   delete player;
   for(auto sprite : sprites) {
     delete sprite;
@@ -45,10 +46,15 @@ Engine::Engine() :
   currentStrategy(1),
   collision(false),
   makeVideo( false ),
-  hud(Hud::getInstance())
+  hud(Hud::getInstance()),
+  poolhud(*player)
 {
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numDragon"); i++) {
-    dragons.push_back(new TwoWayMultiSprite("dragon"));
+    Vector2f pos = player->getPosition();
+    int w = player->getScaledWidth();
+    int h = player->getScaledHeight();
+    dragons.push_back(new SmartTwoWayMultiSprite("dragon", pos, w, h));
+    player->attach(dragons[i]);
   }
   for (int i = 0; i < Gamedata::getInstance().getXmlInt("numFlame"); i++) {
     Vector2f pos = player->getPosition();
@@ -73,6 +79,7 @@ void Engine::draw() const {
   rock.draw();
   desert.draw();
   player->draw();
+  poolhud.draw();
 
   for (int i = 0; i < (int)sprites.size(); i++) {
     sprites[i]->draw();
@@ -104,6 +111,7 @@ void Engine::checkForCollisions() {
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
+  poolhud.update();
   player->update(ticks);
   sky.update();
   hills.update();
@@ -117,7 +125,7 @@ void Engine::update(Uint32 ticks) {
   for (int i = 0; i < (int)dragons.size(); i++) {
     dragons[i]->update(ticks);
   }
-  
+
   viewport.update(); // always update viewport last
 }
 
@@ -150,24 +158,32 @@ void Engine::play() {
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
           if ( clock.isPaused() ) clock.unpause();
-          else{ hud.draw(renderer);
-		clock.pause();
-	  } 
+          else{
+            hud.draw(renderer);
+            clock.pause();
+          }
         }
         if ( keystate[SDL_SCANCODE_T] ) {
           switchSprite();
         }
-	if ( keystate[SDL_SCANCODE_M] ) {
-          currentStrategy = (1 + currentStrategy) % strategies.size();
+        if ( keystate[SDL_SCANCODE_M] ) {
+                currentStrategy = (1 + currentStrategy) % strategies.size();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;
-        }
-        else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
+        }else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
           std::cout << "Terminating frame capture" << std::endl;
           makeVideo = false;
         }
+        if (keystate[SDL_SCANCODE_E])
+        {
+          player->explode();
+        }
+        if ( keystate[SDL_SCANCODE_SPACE] ) {
+          player->shoot();
+        }
+
       }
     }
 

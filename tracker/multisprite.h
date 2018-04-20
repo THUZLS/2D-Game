@@ -5,10 +5,15 @@
 #include <cmath>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class MultiSprite : public Drawable {
 public:
   MultiSprite(const std::string&);
   MultiSprite(const MultiSprite&);
+  MultiSprite(const std::string&, const Vector2f&, const Vector2f&, 
+            const std::vector<Image*>&);
+  ~MultiSprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -26,9 +31,13 @@ public:
     return images[currentFrame]->getSurface();
   }
 
+  virtual void explode();
+
+
 protected:
   std::vector<Image *> images;
-
+  ExplodingSprite* explosion;
+  
   unsigned currentFrame;
   unsigned numberOfFrames;
   unsigned frameInterval;
