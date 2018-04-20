@@ -8,13 +8,16 @@
 #include "twowaymultisprite.h"
 #include "smartSprite.h"
 #include "hud.h"
+#include "poolhud.h"
 
 class Player;
 class CollisionStrategy;
 class SmartSprite;
-//class SubjectSprite;
+class SmartTwoWayMultiSprite;
+    //class SubjectSprite;
 
-class Engine {
+    class Engine
+{
 public:
   Engine ();
   ~Engine ();
@@ -35,7 +38,7 @@ private:
   Viewport& viewport;
 
   std::vector<SmartSprite*> sprites;
-  std::vector<TwoWayMultiSprite*> dragons;
+  std::vector<SmartTwoWayMultiSprite*> dragons;
   std::vector<CollisionStrategy*> strategies;
   Player* player;
   int currentSprite;
@@ -44,6 +47,7 @@ private:
 
   bool makeVideo;
   Hud& hud;
+  PoolHud poolhud;
 
   void draw() const;
   void update(Uint32);
