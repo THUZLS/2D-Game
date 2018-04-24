@@ -3,10 +3,11 @@
 #include "drawable.h"
 #include "gamedata.h"
 
+class CollisionStrategy;
 class Viewport {
 public:
   static Viewport& getInstance();
-  void draw() const;
+  void draw(SDL_Renderer *const renderer, CollisionStrategy* currentStrategy) const;
   void update();
 
   Vector2f getPosition() const { return position; }
@@ -29,6 +30,7 @@ private:
   int objHeight;
   
   const Drawable *objectToTrack;
+  SDL_Rect r;
 
   Viewport();
   Viewport(const Viewport&);

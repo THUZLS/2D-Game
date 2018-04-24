@@ -15,14 +15,14 @@ PoolHud::PoolHud(const Player& p) :
         }
     ),
     showPoolHud(true)
-{
-}
+{}
 
 
 void PoolHud::update() {
 }
 
-void PoolHud::draw() const {
+void PoolHud::draw(int extinguishedFlames) const
+{
     if( !showPoolHud ) {
         return;
     }
@@ -35,11 +35,15 @@ void PoolHud::draw() const {
 
     std::stringstream strm;
     strm << Gamedata::getInstance().getXmlStr("PoolHud/bulletList") << player.bulletCount();
-    IoMod::getInstance().writeText(strm.str(), hudFrame.x+20, 22);
+    IoMod::getInstance().writeText(strm.str(), hudFrame.x+10, 20);
     strm.clear();
     strm.str("");
     strm << Gamedata::getInstance().getXmlStr("PoolHud/freeList") << player.freeCount();
-    IoMod::getInstance().writeText(strm.str(), hudFrame.x+20, 50);
+    IoMod::getInstance().writeText(strm.str(), hudFrame.x+10, 50);
+
+    std::ostringstream flameStream;
+    flameStream << Gamedata::getInstance().getXmlStr("PoolHud/extinguishedFlames") << extinguishedFlames << std::endl;
+    IoMod::getInstance().writeText(flameStream.str(), hudFrame.x + 10, 80);
 
     SDL_SetRenderDrawColor( renderer, 255, 0, 0, 255/2 );
     SDL_RenderDrawRect( renderer, &hudFrame );
