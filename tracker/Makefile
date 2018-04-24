@@ -32,6 +32,8 @@ OBJS = \
 	multibullets.o\
 	poolhud.o\
 	multibullet.o\
+	lifeSprite.o\
+	fallingSprite.o\
 	main.o
 EXEC = run
 

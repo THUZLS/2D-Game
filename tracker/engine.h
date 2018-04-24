@@ -14,14 +14,16 @@ class Player;
 class CollisionStrategy;
 class SmartSprite;
 class SmartTwoWayMultiSprite;
-    //class SubjectSprite;
+class LifeSprite;
+class FallingSprite;
+//class SubjectSprite;
 
-    class Engine
+class Engine
 {
 public:
   Engine ();
   ~Engine ();
-  void play();
+  bool play();
   void switchSprite();
 
 private:
@@ -40,10 +42,17 @@ private:
   std::vector<SmartSprite*> sprites;
   std::vector<SmartTwoWayMultiSprite*> dragons;
   std::vector<CollisionStrategy*> strategies;
+  std::vector<LifeSprite *> lifeVector;
+  std::vector<FallingSprite*> farFallingSprites;
+  std::vector<FallingSprite*> middleFallingSprites;
+  std::vector<FallingSprite*> closeFallingSprites;
   Player* player;
   int currentSprite;
   int currentStrategy;
   bool collision;
+  int gameState;
+  int winCondition;
+  int extinguishedFlames;
 
   bool makeVideo;
   Hud& hud;

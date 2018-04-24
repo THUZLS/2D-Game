@@ -10,7 +10,7 @@
 class PoolHud {
 public:
   PoolHud(const Player&);
-  void draw() const;
+  void draw(int extinguishedFlames) const;
   void update();
   void toggle() { showPoolHud = !showPoolHud; }
   PoolHud(const PoolHud&) = delete;

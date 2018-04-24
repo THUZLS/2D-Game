@@ -6,12 +6,13 @@ public:
 
   static Hud& getInstance();
   ~Hud();
-  void draw(SDL_Renderer * const renderer) const;
+  void draw(SDL_Renderer * const renderer, int gameState) const;
 
 private:
   const Gamedata& gdata;
   SDL_Color hudColor;
   SDL_Rect r;
+  // int gameState;
   Hud():gdata(Gamedata::getInstance()),hudColor({static_cast<Uint8>(gdata.getXmlInt("display/hud/fontcolor/red")), 
 			static_cast<Uint8>(gdata.getXmlInt("display/hud/fontcolor/green")),
                         static_cast<Uint8>(gdata.getXmlInt("display/hud/fontcolor/blue")), 

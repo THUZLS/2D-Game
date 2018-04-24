@@ -7,12 +7,15 @@
 
 <frameCapOn>true</frameCapOn>
 <period>17</period>
+<winCondition>8</winCondition>
 
 <maxFrames>300</maxFrames>
 <username>lance</username>
 
 <numFlame>30</numFlame>
 <numDragon>5</numDragon>
+<numberOfLife>10</numberOfLife>
+<numSnows>25</numSnows>
 
 <collisionStrategy>Rectangular</collisionStrategy>
 
@@ -58,6 +61,12 @@
       <alpha>0</alpha>
     </fontcolor>
   </fps>
+  <lefthud>
+    <locX>10</locX>
+    <locY>0</locY>
+    <width>260</width>
+    <height>120</height>
+  </lefthud>
   <name>
     <locX>20</locX>
     <locY>950</locY>
@@ -78,31 +87,46 @@
       <locX>820</locX>
       <locY>320</locY>
     </title>
+    <lose>
+      <text>"Game Over!"</text>
+      <locX>865</locX>
+      <locY>320</locY>
+    </lose>
+    <win>
+      <text>"You Win!"</text>
+      <locX>865</locX>
+      <locY>320</locY>
+    </win>
     <A_key>
       <text>A Key: Move left</text>
       <locX>820</locX>
-      <locY>420</locY>
+      <locY>490</locY>
     </A_key>
     <D_key>
       <text>D Key: Move right</text>
       <locX>820</locX>
-      <locY>490</locY>
+      <locY>560</locY>
     </D_key>
     <W_key>
       <text>W Key: Move up</text>
       <locX>820</locX>
-      <locY>560</locY>
+      <locY>630</locY>
     </W_key>
     <S_key>
       <text>S Key: Move down</text>
       <locX>820</locX>
-      <locY>630</locY>
+      <locY>700</locY>
     </S_key>
     <M_key>
       <text>M Key: Change strategy</text>
       <locX>820</locX>
-      <locY>700</locY>
+      <locY>420</locY>
     </M_key>
+    <R_key>
+      <text>Press R key to restart the game!</text>
+      <locX>700</locX>
+      <locY>400</locY>
+    </R_key>
     <fontcolor>
       <red>0</red>
       <green>0</green>
@@ -216,13 +240,26 @@
   <bulletName>Bullet</bulletName>
 </LanceDragonLeft>
 
+<Snow>
+  <file>assets/Donut.png</file>
+  <startLoc x="50" y="50"/>
+  <speedX>0</speedX>
+  <speedY>100</speedY>
+  <frames>16</frames>
+  <frameInterval>100</frameInterval>
+  <imageWidth>128</imageWidth>
+  <imageHeight>128</imageHeight>
+  <scale>1.0</scale>
+  <transparency>false</transparency>
+</Snow>
+
 <Bullet>
   <file>assets/bullet.png</file>
-  <interval>300</interval>
-  <distance>300</distance>
-  <speedX>200</speedX>
+  <interval>200</interval>
+  <distance>1000</distance>
+  <speedX>500</speedX>
   <speedY>0</speedY>
-  <minSpeedX>200</minSpeedX>
+  <minSpeedX>500</minSpeedX>
   <frames>1</frames>
   <frameInterval>200</frameInterval>
   <startLoc x="100" y="100"/>
@@ -233,12 +270,20 @@
 </Bullet>
 
 <PoolHud>
-  <positionX>1700</positionX>
+  <positionX>1640</positionX>
   <positionY>0</positionY>
-  <width>150</width>
-  <height>150</height>
+  <width>270</width>
+  <height>120</height>
   <bulletList>Bullet List:  </bulletList>
   <freeList>Free List:  </freeList>
+  <extinguishedFlames>Extinguished Flames:  </extinguishedFlames>
 </PoolHud>
+
+<Lifebar>
+  <file>assets/Lifebar.png</file>
+  <imageWidth>36</imageWidth>
+  <imageHeight>21</imageHeight>
+  <transparency>false</transparency>
+</Lifebar>
 
 </GameData>

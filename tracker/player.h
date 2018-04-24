@@ -41,6 +41,7 @@ public:
   unsigned int bulletCount() const {return bullets.bulletCount();}
   unsigned int freeCount() const {return bullets.freeCount();}
   virtual void draw() const;
+  bool bulletCollided(const Drawable* it)  { return bullets.collided(it); }
 
 private:
   bool collision;
