@@ -7,7 +7,7 @@
 
 <frameCapOn>true</frameCapOn>
 <period>17</period>
-<winCondition>8</winCondition>
+<winCondition>36</winCondition>
 
 <maxFrames>300</maxFrames>
 <username>lance</username>
@@ -79,54 +79,84 @@
   </name>
   <hud>
     <locX>480</locX>
-    <locY>270</locY>
+    <locY>260</locY>
     <width>960</width>
-    <height>540</height>
+    <height>610</height>
     <title>
       <text>"Function Key"</text>
       <locX>820</locX>
-      <locY>320</locY>
+      <locY>310</locY>
     </title>
     <lose>
       <text>"Game Over!"</text>
       <locX>865</locX>
-      <locY>320</locY>
+      <locY>310</locY>
     </lose>
     <win>
       <text>"You Win!"</text>
       <locX>865</locX>
-      <locY>320</locY>
+      <locY>310</locY>
     </win>
-    <A_key>
-      <text>A Key: Move left</text>
-      <locX>820</locX>
-      <locY>490</locY>
-    </A_key>
-    <D_key>
-      <text>D Key: Move right</text>
-      <locX>820</locX>
-      <locY>560</locY>
-    </D_key>
-    <W_key>
-      <text>W Key: Move up</text>
-      <locX>820</locX>
-      <locY>630</locY>
-    </W_key>
-    <S_key>
-      <text>S Key: Move down</text>
-      <locX>820</locX>
-      <locY>700</locY>
-    </S_key>
-    <M_key>
-      <text>M Key: Change strategy</text>
-      <locX>820</locX>
-      <locY>420</locY>
-    </M_key>
-    <R_key>
+    <SPACE_key>
+      <text>Press SPACE Key to shoot!</text>
+      <locX>750</locX>
+      <locY>400</locY>
+    </SPACE_key>
+    <RESTART_key>
       <text>Press R key to restart the game!</text>
       <locX>700</locX>
       <locY>400</locY>
+    </RESTART_key>
+    <R_key>
+      <text>R Key: Restart Game</text>
+      <locX>580</locX>
+      <locY>490</locY>
     </R_key>
+    <A_key>
+      <text>A Key: Move left</text>
+      <locX>580</locX>
+      <locY>560</locY>
+    </A_key>
+    <D_key>
+      <text>D Key: Move right</text>
+      <locX>580</locX>
+      <locY>630</locY>
+    </D_key>
+    <W_key>
+      <text>W Key: Move up</text>
+      <locX>580</locX>
+      <locY>700</locY>
+    </W_key>
+    <S_key>
+      <text>S Key: Move down</text>
+      <locX>580</locX>
+      <locY>770</locY>
+    </S_key>
+    <M_key>
+      <text>M Key: Start Menu</text>
+      <locX>1000</locX>
+      <locY>490</locY>
+    </M_key>
+    <F1_key>
+      <text>F1 Key: Key Information</text>
+      <locX>1000</locX>
+      <locY>560</locY>
+    </F1_key>
+    <C_key>
+      <text>C Key: Change Strategy</text>
+      <locX>1000</locX>
+      <locY>630</locY>
+    </C_key>
+    <G_key>
+      <text>G Key: God Mode</text>
+      <locX>1000</locX>
+      <locY>700</locY>
+    </G_key>
+    <E_key>
+      <text>E Key: Give Up</text>
+      <locX>1000</locX>
+      <locY>770</locY>
+    </E_key>
     <fontcolor>
       <red>0</red>
       <green>0</green>
@@ -170,7 +200,7 @@
   <file>assets/dragon.png</file>
   <startLoc x="550" y="140"/>
   <frames>12</frames>
-  <frameInterval>300</frameInterval>
+  <frameInterval>100</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
@@ -185,7 +215,7 @@
   <file>assets/dragonLeft.png</file>
   <startLoc x="50" y="140"/>
   <frames>12</frames>
-  <frameInterval>300</frameInterval>
+  <frameInterval>100</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
@@ -212,7 +242,7 @@
   <file>assets/dragon.png</file>
   <startLoc x="50" y="140"/>
   <frames>12</frames>
-  <frameInterval>300</frameInterval>
+  <frameInterval>200</frameInterval>
   <speedX>500</speedX>
   <speedY>300</speedY>
   <slowDownFactor>0.5</slowDownFactor>
@@ -228,7 +258,7 @@
   <file>assets/dragonLeft.png</file>
   <startLoc x="50" y="140"/>
   <frames>12</frames>
-  <frameInterval>300</frameInterval>
+  <frameInterval>200</frameInterval>
   <speedX>500</speedX>
   <speedY>300</speedY>
   <slowDownFactor>0.5</slowDownFactor>
@@ -279,11 +309,65 @@
   <extinguishedFlames>Extinguished Flames:  </extinguishedFlames>
 </PoolHud>
 
-<Lifebar>
-  <file>assets/Lifebar.png</file>
-  <imageWidth>36</imageWidth>
-  <imageHeight>21</imageHeight>
-  <transparency>false</transparency>
-</Lifebar>
+<HealthBar>
+  <startLoc x="40" y="150"/>
+  <!-- number of times the bar is decremented -->
+  <increment>10</increment>
+  <interval>10</interval>
+  <width>200</width>
+  <height>15</height>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <backColor>
+    <r>255</r>
+    <g>255</g>
+    <b>255</b>
+    <a>127</a>
+  </backColor>
+  <barColor>
+    <r>255</r>
+    <g>0</g>
+    <b>0</b>
+    <a>255</a>
+  </barColor>
+</HealthBar>
+
+<menu>
+  <width>1920</width>
+  <height>1080</height>
+  <noOfOptions>3</noOfOptions>
+  <loc x="0" y="0"/>
+  <optionLoc x="840" y="680" />
+  <color r="193" g="205" b="205" a="255"/>
+  <textcolor r="0" g="0" b="0" a="0"/>
+  <text1>Hi, brave challenger!  Welcome to the dragon valley!  Join us and have fun!</text1>
+  <text2>As you are the strongest dragon among us,it's your duty to defend our home.</text2>
+  <text3>Lots of flames are attacking our home now, you must extinguish the flames.</text3>
+  <text4>You have ten drops of blood. Be careful not to collide/shoot other Dragons. </text4>
+  <text5>If you shoot other dragons ,  you will be punished by decreasing one blood.</text5>
+  <text6>If you bump into other dragons  ,  you will be deducted two drops of blood.</text6>
+  <text7>                  Winning Condition: extinguish 36 flames!</text7>
+  <text8>                      Failure Condition: run out of blood!</text8>
+  <option0>Go to Game</option0>
+  <option1>God Mode</option1>
+  <option2>Quit</option2>
+  <spaces>70</spaces>
+</menu>
+
+<clickOn>
+  <file>assets/clickon.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOn>
+
+<clickOff>
+  <file>assets/clickoff.png</file>
+  <startLoc x="340" y="170"/>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>
+</clickOff>
 
 </GameData>

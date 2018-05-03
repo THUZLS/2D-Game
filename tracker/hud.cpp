@@ -30,29 +30,33 @@ void Hud::draw(SDL_Renderer * const renderer, int gameState) const {
                                    gdata.getXmlInt("display/hud/title/locX"),
                                    gdata.getXmlInt("display/hud/title/locY"),
                                    hudColor, "Marker_Felt_Thin");
-    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/M_key/text"),
-                                   gdata.getXmlInt("display/hud/M_key/locX"),
-                                   gdata.getXmlInt("display/hud/M_key/locY"),
+    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/SPACE_key/text"),
+                                   gdata.getXmlInt("display/hud/SPACE_key/locX"),
+                                   gdata.getXmlInt("display/hud/SPACE_key/locY"),
                                    hudColor, "Marker_Felt_Thin");
   }else if(gameState==1){
     IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/lose/text"),
                                    gdata.getXmlInt("display/hud/lose/locX"),
                                    gdata.getXmlInt("display/hud/lose/locY"),
                                    hudColor, "Marker_Felt_Thin");
-    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/R_key/text"),
-                                   gdata.getXmlInt("display/hud/R_key/locX"),
-                                   gdata.getXmlInt("display/hud/R_key/locY"),
+    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/RESTART_key/text"),
+                                   gdata.getXmlInt("display/hud/RESTART_key/locX"),
+                                   gdata.getXmlInt("display/hud/RESTART_key/locY"),
                                    hudColor, "Marker_Felt_Thin");
   }else if(gameState==2){
     IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/win/text"),
                                    gdata.getXmlInt("display/hud/win/locX"),
                                    gdata.getXmlInt("display/hud/win/locY"),
                                    hudColor, "Marker_Felt_Thin");
-    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/R_key/text"),
-                                   gdata.getXmlInt("display/hud/R_key/locX"),
-                                   gdata.getXmlInt("display/hud/R_key/locY"),
+    IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/RESTART_key/text"),
+                                   gdata.getXmlInt("display/hud/RESTART_key/locX"),
+                                   gdata.getXmlInt("display/hud/RESTART_key/locY"),
                                    hudColor, "Marker_Felt_Thin");
   }
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/R_key/text"),
+                                 gdata.getXmlInt("display/hud/R_key/locX"),
+                                 gdata.getXmlInt("display/hud/R_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
   IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/A_key/text"),
                                  gdata.getXmlInt("display/hud/A_key/locX"),
                                  gdata.getXmlInt("display/hud/A_key/locY"),
@@ -69,8 +73,28 @@ void Hud::draw(SDL_Renderer * const renderer, int gameState) const {
                                  gdata.getXmlInt("display/hud/S_key/locX"),
                                  gdata.getXmlInt("display/hud/S_key/locY"),
                                  hudColor, "Marker_Felt_Thin");
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/M_key/text"),
+                                 gdata.getXmlInt("display/hud/M_key/locX"),
+                                 gdata.getXmlInt("display/hud/M_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/F1_key/text"),
+                                 gdata.getXmlInt("display/hud/F1_key/locX"),
+                                 gdata.getXmlInt("display/hud/F1_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/C_key/text"),
+                                 gdata.getXmlInt("display/hud/C_key/locX"),
+                                 gdata.getXmlInt("display/hud/C_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/G_key/text"),
+                                 gdata.getXmlInt("display/hud/G_key/locX"),
+                                 gdata.getXmlInt("display/hud/G_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
+  IoMod::getInstance().writeText(gdata.getXmlStr("display/hud/E_key/text"),
+                                 gdata.getXmlInt("display/hud/E_key/locX"),
+                                 gdata.getXmlInt("display/hud/E_key/locY"),
+                                 hudColor, "Marker_Felt_Thin");
 
   // Render the rect to the screen
   SDL_RenderPresent(renderer);
-  
+
 }

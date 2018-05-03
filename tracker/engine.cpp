@@ -4,6 +4,7 @@
 #include <string>
 #include <random>
 #include <iomanip>
+#include <unistd.h>
 #include "smartSprite.h"
 #include "twowaymultisprite.h"
 #include "player.h"
@@ -12,11 +13,13 @@
 #include "frameGenerator.h"
 #include "collisionStrategy.h"
 #include "smartTwowaymultisprite.h"
-#include "lifeSprite.h"
 #include "fallingSprite.h"
+#include "sound.h"
+#include "ioModShort.h"
 
 Engine::~Engine() {
   delete player;
+  delete healthBar;
   for(auto sprite : sprites) {
     delete sprite;
   }
@@ -25,9 +28,6 @@ Engine::~Engine() {
   }
   for ( CollisionStrategy* strategy : strategies ) {
     delete strategy;
-  }
-  for (LifeSprite *life : lifeVector){
-    delete life;
   }
   for (FallingSprite *fallingSprite : farFallingSprites){
     delete fallingSprite;
@@ -45,6 +45,7 @@ Engine::Engine() : rc(RenderContext::getInstance()),
                    io(IoMod::getInstance()),
                    clock(Clock::getInstance()),
                    renderer(rc->getRenderer()),
+                   healthBar(new HealthBar("HealthBar")),
                    sky("sky", Gamedata::getInstance().getXmlInt("sky/factor")),
                    hills("hills", Gamedata::getInstance().getXmlInt("hills/factor")),
                    mountain("mountain", Gamedata::getInstance().getXmlInt("mountain/factor")),
@@ -54,7 +55,6 @@ Engine::Engine() : rc(RenderContext::getInstance()),
                    sprites(),
                    dragons(),
                    strategies(),
-                   lifeVector(),
                    farFallingSprites(),
                    middleFallingSprites(),
                    closeFallingSprites(),
@@ -65,14 +65,18 @@ Engine::Engine() : rc(RenderContext::getInstance()),
                    gameState(0),
                    winCondition(Gamedata::getInstance().getXmlInt("winCondition")),
                    extinguishedFlames(0),
+                   lifeNumber(Gamedata::getInstance().getXmlInt("numberOfLife")),
                    makeVideo(false),
                    hud(Hud::getInstance()),
-                   poolhud(*player)
+                   poolhud(*player),
+                   godmode(false),
+                   countdown(2),
+                   menuEngine()
 {
   Vector2f pos = player->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
-  for (int i = 0; i < Gamedata::getInstance().getXmlInt("numDragon"); i++) { 
+  for (int i = 0; i < Gamedata::getInstance().getXmlInt("numDragon"); i++) {
     dragons.push_back(new SmartTwoWayMultiSprite("dragon", pos, w, h));
     player->attach(dragons[i]);
   }
@@ -81,13 +85,6 @@ Engine::Engine() : rc(RenderContext::getInstance()),
     player->attach( sprites[i] );
   }
 
-  int lifeNumber = Gamedata::getInstance().getXmlInt("numberOfLife");
-  lifeVector.reserve(lifeNumber);
-  for (int i = 0; i < lifeNumber; ++i)
-  {
-    lifeVector.push_back(new LifeSprite("Lifebar", pos, Vector2f(0, 0), pos, w, h));
-  }
-  
   int n = Gamedata::getInstance().getXmlInt("numSnows");
   for (int i=0; i<(int)(n*0.33); i++) {
     farFallingSprites.push_back(new FallingSprite("Snow"));
@@ -135,9 +132,7 @@ void Engine::draw() const {
     dragons[i]->draw();
   }
 
-  for (unsigned int i = 0; i < lifeVector.size(); i++){
-    lifeVector.at(i)->draw();
-  }
+  healthBar->draw();
 
   //  IoMod::getInstance().writeText("Press m to change strategy", 20, 80);
   viewport.draw(renderer, strategies[currentStrategy]);
@@ -145,10 +140,10 @@ void Engine::draw() const {
   SDL_RenderPresent(renderer);
 }
 
-void Engine::checkForCollisions() {
+void Engine::checkForCollisions(SDLSound &sound)
+{
   auto it = sprites.begin();
   auto dit = dragons.begin();
-  auto lit = lifeVector.end() - 1;
   while ( it != sprites.end() ) {
     if ( strategies[currentStrategy]->execute(*player, **it) ) {
       SmartSprite* doa = *it;
@@ -158,8 +153,9 @@ void Engine::checkForCollisions() {
     }else if(player->bulletCollided(*it)) {
         SmartSprite* doa = *it;
         doa->explode();
+        sound[0];
         ++extinguishedFlames;
-        if (winCondition == extinguishedFlames)
+        if (winCondition <= extinguishedFlames)
         {
           std::cout << "You Win!" << std::endl;
           gameState = 2;
@@ -176,47 +172,39 @@ void Engine::checkForCollisions() {
       player->detach(doc);
       delete doc;
       dit = dragons.erase(dit);
-      // delete doc;
-      if (lifeVector.size() > 0)
+      if(!godmode){
+        lifeNumber -= 2;
+      }
+      sound[5];
+      if (lifeNumber <= 0)
       {
-        LifeSprite *dob = *lit;
-        delete dob;
-        lit = lifeVector.erase(lit);
-        lit--;
-        lit = lifeVector.erase(lit);
-        lit--;
-        if (lifeVector.size() == 0)
-        {
-          std::cout << "Game over!" << std::endl;
-          gameState = 1;
-        }
+        std::cout << "Game over!" << std::endl;
+        gameState = 1;
       }
     }
     else if (player->bulletCollided(*dit))
     {
       SmartTwoWayMultiSprite *doc = *dit;
       doc->explode();
-      if (lifeVector.size() > 0)
-      {
-        LifeSprite *dob = *lit;
-        delete dob;
-        lit = lifeVector.erase(lit);
-        lit--;
-        if (lifeVector.size() == 0)
-        {
-          std::cout << "Game over!" << std::endl;
-          gameState = 1;
-        }
+      if(!godmode){
+        --lifeNumber;
       }
-    }
-    else
+      sound[0];
+      if (lifeNumber <= 0)
+      {
+        std::cout << "Game over!" << std::endl;
+        gameState = 1;
+      }
+    }else
       ++dit;
   }
 }
 
-void Engine::update(Uint32 ticks) {
-  if (!gameState){
-    checkForCollisions();
+void Engine::update(Uint32 ticks, SDLSound& sound)
+{
+  if (gameState==0){
+    checkForCollisions(sound);
+    healthBar->update(ticks, lifeNumber);
     poolhud.update();
     player->update(ticks);
     for (FallingSprite* fallingSprite : farFallingSprites) fallingSprite->update(ticks);
@@ -237,20 +225,23 @@ void Engine::update(Uint32 ticks) {
       dragons[i]->update(ticks);
     }
 
-    int number = 0;
-    for (LifeSprite *life : lifeVector)
-    {
-      life->update(ticks, player->getPosition(), number);
-      number++;
-    }
-
     viewport.update(); // always update viewport last
   }else if(gameState==1){
-    hud.draw(renderer, gameState);
-    clock.pause();
+    healthBar->update(ticks, lifeNumber);
+    if ( --countdown <= 0)
+    {
+      hud.draw(renderer, gameState);
+      sound.toggleMusic();
+      sound[3];
+      //sleep(10);
+      clock.pause();
+      countdown=2;
+    }
   }else if (gameState == 2){
     hud.draw(renderer, gameState);
     clock.pause();
+    sound.toggleMusic();
+    sound[1];
   }
 }
 
@@ -263,9 +254,18 @@ void Engine::switchSprite(){
 bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
-  bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
+
+  SDLSound sound;
+  IOmod &io = IOmod::getInstance();
+  io.setRenderer(renderer);
+  clock.pause();
+  int choose = menuEngine.play();
+  bool done = (choose > 0) ? false : true;
+  if(choose==2)
+    godmode = 1;
+  clock.unpause();
 
   while ( !done ) {
     // The next loop polls for events, guarding against key bounce:
@@ -278,20 +278,30 @@ bool Engine::play() {
           break;
         }
         if ( keystate[SDL_SCANCODE_P] ) {
-          if ( clock.isPaused() ) clock.unpause();
-          else clock.pause();
+          if ( clock.isPaused() ){
+            clock.unpause();
+            sound.toggleMusic();
+          } else{
+            clock.pause();
+            sound.toggleMusic();
+          }
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
-          if ( clock.isPaused() ) clock.unpause();
+          if (clock.isPaused())
+          {
+            clock.unpause();
+            sound.toggleMusic();
+          }
           else{
             hud.draw(renderer, gameState);
             clock.pause();
+            sound.toggleMusic();
           }
         }
         if ( keystate[SDL_SCANCODE_T] ) {
           switchSprite();
         }
-        if ( keystate[SDL_SCANCODE_M] ) {
+        if ( keystate[SDL_SCANCODE_C] ) {
                 currentStrategy = (1 + currentStrategy) % strategies.size();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
@@ -304,14 +314,31 @@ bool Engine::play() {
         if (keystate[SDL_SCANCODE_E])
         {
           player->explode();
-          // gameState = 1;
+          sound[5];
+          gameState = 1;
+          lifeNumber = 0;
         }
         if ( keystate[SDL_SCANCODE_SPACE] ) {
           player->shoot();
+          sound[2];
         }
         if (keystate[SDL_SCANCODE_R]){
           clock.unpause();
+          static_cast<HealthBar *>(healthBar)->reset();
           return true;
+        }
+        if (keystate[SDL_SCANCODE_G])
+        {
+          godmode = 1;
+        }
+        if (keystate[SDL_SCANCODE_M] || keystate[SDL_SCANCODE_O])
+        {
+          clock.pause();
+          choose = menuEngine.play();
+          done = (choose > 0) ? false : true;
+          if (choose == 2)
+            godmode = 1;
+          clock.unpause();
         }
       }
     }
@@ -334,7 +361,7 @@ bool Engine::play() {
         static_cast<Player*>(player)->down();
       }
       draw();
-      update(ticks);
+      update(ticks, sound);
       if ( makeVideo ) {
         frameGen.makeFrame();
       }

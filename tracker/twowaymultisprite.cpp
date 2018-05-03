@@ -14,11 +14,11 @@ Vector2f TwoWayMultiSprite::dragonsmakeVelocity(int vx, int vy) const
 }
 
 void TwoWayMultiSprite::advanceFrame(Uint32 ticks) {
-	timeSinceLastFrame += ticks;
-	if (timeSinceLastFrame > frameInterval) {
+  timeSinceLastFrame += ticks;
+  if (timeSinceLastFrame > frameInterval) {
     currentFrame = (currentFrame+1) % numberOfFrames;
-		timeSinceLastFrame = 0;
-	}
+    timeSinceLastFrame = 0;
+  }
 }
 
 TwoWayMultiSprite::~TwoWayMultiSprite()
@@ -131,17 +131,17 @@ void TwoWayMultiSprite::update(Uint32 ticks) {
 
   if ( getX() < 0) {
     setVelocityX( fabs( getVelocityX() ) );
-//		images = imagesRight;
+//    images = imagesRight;
   }
   if (getVelocityX()>0){
-	images = imagesRight;
+  images = imagesRight;
   }
   if ( getX() > worldWidth-getScaledWidth()) {
     setVelocityX( -fabs( getVelocityX() ) );
-//		images = imagesLeft;
+//    images = imagesLeft;
   }
   if (getVelocityX()<0){
-	images = imagesLeft;
+  images = imagesLeft;
   }
 
 }

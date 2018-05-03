@@ -16,7 +16,7 @@ Player::Player(const std::string &name) : TwoWayMultiSprite(name),
                                           timeSinceLastBullet(0),
                                           minBulletSpeed(Gamedata::getInstance().getXmlInt(bulletName+"/minSpeedX")),
                                           bullets(bulletName),
-                                         facing(RIGHT)
+                                          facing(RIGHT)
 { setVelocityX(0); setVelocityY(0); }
 
 Player::Player(const Player &s) : TwoWayMultiSprite(s),

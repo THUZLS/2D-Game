@@ -23,3 +23,10 @@ Add a conclusion and some features to the game.<br>
 Images source:<br>
 1. http://s.aigei.com/src/img/png/ad/ad4f2238d2da4b89acdf8bb0972220fe.png?imageMogr2/auto-orient/thumbnail/!171x171r/gravity/Center/crop/171x171/quality/85/&e=1735488000&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:t-mA-DWhLQ-nVBPs4HEJoztkAR8= <br>
 2. http://s.aigei.com/src/img/png/c7/c76838079bc842518f02d3133b8d2c53.png?imageMogr2/auto-orient/thumbnail/!35x20r/gravity/Center/crop/35x20/quality/85/&e=1735488000&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:K6cHnyQIvFgMXht_MaQa2D9TS9M=<br>
+
+## Phase 5
+Build a playable game that reaches a conclusion.<br>
+
+Music source:
+1. http://sc.chinaz.com/yinxiao/150504525730.htm#down
+2. http://sc.chinaz.com/yinxiao/170102478983.htm#down

@@ -6,7 +6,7 @@
 #include "collisionStrategy.h"
 
 
-MultiBullets::~MultiBullets() { }
+MultiBullets::~MultiBullets() { delete strategy;}
 
 MultiBullets::MultiBullets(const std::string& n) :
   name(n),
@@ -26,7 +26,7 @@ MultiBullets::MultiBullets(const std::string& n) :
     strategy = new MidPointCollisionStrategy;
   } else if(thisStratety == "Rectangular") {
       std::cout << "Rectangular strategy!" << std::endl;
-    strategy = new RectangularCollisionStrategy;
+      strategy = new RectangularCollisionStrategy;
   }
  }
 
